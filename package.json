@@ -1,6 +1,6 @@
 {
   "name": "sociona-mcp-server",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "MCP server for Sociona social media API - interact with social media platforms through AI assistants and MCP-compatible tools",
   "main": "dist/index.js",
   "bin": {
