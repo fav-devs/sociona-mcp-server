@@ -1,39 +1,48 @@
 # Sociona MCP Server
 
+[![npm version](https://badge.fury.io/js/sociona-mcp-server.svg)](https://badge.fury.io/js/sociona-mcp-server)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![GitHub release](https://img.shields.io/github/release/fav-devs/sociona-mcp-server.svg)](https://github.com/fav-devs/sociona-mcp-server/releases)
+
 An MCP (Model Context Protocol) server that provides AI assistants and MCP-compatible tools with access to the Sociona social media API.
 
-## Features
+## 🚀 Features
 
 - **Publish Posts**: Immediately publish content to social media platforms
 - **Schedule Posts**: Schedule posts for future publication
 - **Cancel Scheduled Posts**: Cancel posts before they publish
 - **List Accounts**: View connected social media accounts
-- **Get Posts**: Retrieve recent post history
-- **Get Scheduled Posts**: View upcoming scheduled posts
-- **Get Post Statistics**: View aggregate posting statistics
+- **Post History**: Retrieve recent post history with filtering
+- **Analytics**: Get statistics about your posts
+- **Multi-Platform Support**: X (Twitter), Instagram, and Threads
 
-## Supported Platforms
+## 📦 Installation
 
-- X (Twitter)
-- Instagram
-- Threads
-
-## Quick Start
-
-### 1. Install
+### Quick Install
 ```bash
-# Install globally (recommended)
 npm install -g sociona-mcp-server
-
-# Or run the installation script
-curl -sSL https://raw.githubusercontent.com/your-repo/sociona-mcp-server/main/install.sh | bash
 ```
+
+### Alternative Installation
+```bash
+# Using the installation script
+curl -sSL https://raw.githubusercontent.com/fav-devs/sociona-mcp-server/main/install.sh | bash
+```
+
+## ⚙️ Configuration
+
+### 1. Get Your API Key
+1. Sign up at [Sociona Developer Portal](https://sociona.app/developer)
+2. Create a new application
+3. Generate an API key with required scopes:
+   - `posts:write` - for publishing posts
+   - `posts:read` - for reading posts
+   - `schedule:write` - for scheduling posts
+   - `schedule:read` - for reading scheduled posts
 
 ### 2. Configure Your MCP Client
 
 #### For Claude Desktop
-Add to your Claude Desktop configuration file:
-
 **macOS:** `~/Library/Application Support/Claude/claude_desktop_config.json`
 **Windows:** `%APPDATA%/Claude/claude_desktop_config.json`
 
@@ -55,17 +64,10 @@ Add to your Claude Desktop configuration file:
 #### For Other MCP Clients
 Configure your MCP client to use the `sociona-mcp` command with the required environment variables.
 
-### 4. Get Your API Key
+### 3. Restart Your MCP Client
+Restart your MCP client to load the new MCP server configuration.
 
-1. Sign up at [Sociona Developer Portal](https://sociona.app/developer)
-2. Create a new application
-3. Generate an API key with required scopes
-
-### 5. Restart Claude Desktop
-
-Restart Claude Desktop to load the new MCP server configuration.
-
-## Usage
+## 💬 Usage
 
 Once configured, you can use natural language commands with your MCP client:
 
@@ -76,49 +78,88 @@ Once configured, you can use natural language commands with your MCP client:
 
 "Show me my connected social accounts"
 
-"Get my last 10 posts"
+"Get my last 10 posts from X"
 
 "Cancel the scheduled post with ID sched-123"
 
 "What's my posting statistics?"
 ```
 
-## API Reference
+## 🛠️ Available Tools
 
-This MCP server wraps the [Sociona Developer API](https://docs.sociona.app). See the API documentation for detailed endpoint information.
+The Sociona MCP Server exposes the following tools:
 
-## Troubleshooting
+- **`publish_post`**: Publish a social media post immediately
+- **`schedule_post`**: Schedule a social media post for future publication
+- **`get_accounts`**: List all connected social media accounts
+- **`get_posts`**: Retrieve recent post history
+- **`get_scheduled_posts`**: View upcoming scheduled posts
+- **`cancel_scheduled_post`**: Cancel a scheduled post before it publishes
+- **`get_post_stats`**: Get statistics about your posts
 
-### Common Issues
+## 🔧 Development
 
-1. **"SOCIONA_API_KEY environment variable is required"**
-   - Ensure your API key is set in the Claude Desktop config
+### Prerequisites
+- Node.js 18 or higher
+- npm or pnpm
 
-2. **"No X account connected"**
-   - Connect your social media accounts in Sociona first
+### Setup
+```bash
+# Clone the repository
+git clone https://github.com/fav-devs/sociona-mcp-server.git
+cd sociona-mcp-server
 
-3. **Rate limit exceeded**
-   - Check your API key's rate limits in the developer portal
+# Install dependencies
+npm install
 
-4. **MCP server not loading**
-   - Verify the path to `dist/index.js` is absolute and correct
-   - Check Claude Desktop logs for errors
+# Build the project
+npm run build
 
-### Logs
+# Run in development mode
+npm run dev
+```
 
-The MCP server logs to stderr. Check Claude Desktop's logs for debugging information.
+### Scripts
+- `npm run build` - Build the TypeScript code
+- `npm run dev` - Run in development mode
+- `npm start` - Start the MCP server
+- `npm test` - Run tests
 
-## Development
+## 📚 Documentation
 
-For local development:
+- [Developer Installation Guide](DEVELOPER_INSTALLATION.md) - Detailed setup instructions
+- [Local Setup Guide](LOCAL_SETUP.md) - For local development
+- [Architecture Overview](ARCHITECTURE.md) - Technical architecture details
+- [Railway Deployment](RAILWAY_DEPLOYMENT.md) - Cloud deployment guide
 
-1. Make changes to `src/index.ts`
-2. Run `npm run build` to compile TypeScript
-3. Update your Claude Desktop config to point to the rebuilt `dist/index.js`
-4. Test the changes through Claude Desktop
+## 🤝 Contributing
 
-**Note:** The MCP server cannot be run standalone - it must be invoked by an MCP client like Claude Desktop.
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-## License
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-MIT
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🔗 Links
+
+- [NPM Package](https://www.npmjs.com/package/sociona-mcp-server)
+- [Sociona API Documentation](https://docs.sociona.app)
+- [Model Context Protocol](https://modelcontextprotocol.io)
+
+## 🆘 Support
+
+If you encounter any issues or have questions:
+
+1. Check the [Issues](https://github.com/fav-devs/sociona-mcp-server/issues) page
+2. Create a new issue if your problem isn't already reported
+3. Join our community discussions
+
+---
+
+Made with ❤️ by the Sociona team
