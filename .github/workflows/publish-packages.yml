@@ -1,9 +1,10 @@
 name: Publish to GitHub Packages
 
 on:
-  push:
-    tags:
-      - 'v*'
+  # Disabled for now - focusing on NPM publishing
+  # push:
+  #   tags:
+  #     - 'v*'
   workflow_dispatch:
 
 jobs:
@@ -31,7 +32,7 @@ jobs:
         run: npm test
         
       - name: Publish to GitHub Packages
-        run: npm publish
+        run: npm publish --registry https://npm.pkg.github.com --scope @fav-devs
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
