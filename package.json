@@ -1,0 +1,56 @@
+{
+  "name": "sociona-mcp-server",
+  "version": "1.0.1",
+  "description": "MCP server for Sociona social media API - interact with social media platforms through AI assistants and MCP-compatible tools",
+  "main": "dist/index.js",
+  "bin": {
+    "sociona-mcp": "dist/cli.js"
+  },
+  "type": "module",
+  "files": [
+    "dist/**/*",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "claude",
+    "social-media",
+    "twitter",
+    "instagram",
+    "threads",
+    "sociona",
+    "api",
+    "ai",
+    "automation"
+  ],
+  "author": "Sociona Team",
+  "license": "MIT",
+  "homepage": "https://sociona.app",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sociona/sociona-mcp-server.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sociona/sociona-mcp-server/issues"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsx src/index.ts",
+    "prepublishOnly": "npm run build",
+    "test": "echo \"No tests specified\" && exit 0"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^0.4.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.0.0"
+  }
+}
