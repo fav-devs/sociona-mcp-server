@@ -39,9 +39,9 @@ try {
   execSync('git push', { stdio: 'inherit' });
   execSync('git push --tags', { stdio: 'inherit' });
   
-  // 7. Publish to NPM
-  console.log('📦 Publishing to NPM...');
-  execSync('npm publish', { stdio: 'inherit' });
+  // 7. Publish to NPM (using GitHub Actions)
+  console.log('📦 Publishing to NPM via GitHub Actions...');
+  console.log('   Note: Publishing will be handled by the automated workflow');
   
   // 8. Create GitHub release
   console.log('🎉 Creating GitHub release...');
