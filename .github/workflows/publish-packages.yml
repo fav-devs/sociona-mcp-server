@@ -1,0 +1,54 @@
+name: Publish to GitHub Packages
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+jobs:
+  publish-github-packages:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@fav-devs'
+          
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: Build package
+        run: npm run build
+        
+      - name: Run tests
+        run: npm test
+        
+      - name: Publish to GitHub Packages
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Create Release Assets
+        run: |
+          # Create a tarball of the package
+          npm pack
+          
+          # Create a zip file for easy download
+          zip -r sociona-mcp-server-${{ github.ref_name }}.zip dist/ package.json README.md LICENSE
+          
+      - name: Upload Release Assets
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.upload_url }}
+          asset_path: ./sociona-mcp-server-${{ github.ref_name }}.tgz
+          asset_name: sociona-mcp-server-${{ github.ref_name }}.tgz
+          asset_content_type: application/gzip
