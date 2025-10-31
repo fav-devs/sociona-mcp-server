@@ -6,6 +6,10 @@
 
 An MCP (Model Context Protocol) server that provides AI assistants and MCP-compatible tools with access to the Sociona social media API.
 
+<a href="https://glama.ai/mcp/servers/@fav-devs/sociona-mcp-server">
+  <img width="380" height="200" src="https://glama.ai/mcp/servers/@fav-devs/sociona-mcp-server/badge" alt="Sociona Server MCP server" />
+</a>
+
 ## 🚀 Features
 
 - **Publish Posts**: Immediately publish content to social media platforms
