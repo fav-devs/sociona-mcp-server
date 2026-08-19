@@ -1,6 +1,6 @@
 {
   "name": "sociona-mcp-server",
-  "version": "1.0.10",
+  "version": "2.0.0",
   "description": "MCP server for Sociona social media API - interact with social media platforms through AI assistants and MCP-compatible tools",
   "main": "dist/index.js",
   "bin": {
@@ -53,7 +53,8 @@
     "release:major": "node scripts/release.js major"
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^0.4.0"
+    "@modelcontextprotocol/server": "^2.0.0",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
