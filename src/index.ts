@@ -6,7 +6,7 @@ import {
 } from '@modelcontextprotocol/sdk/types.js';
 
 const SOCIONA_API_KEY = process.env.SOCIONA_API_KEY;
-const API_BASE = process.env.SOCIONA_API_BASE || 'https://api.sociona.com/api/v1';
+const API_BASE = process.env.SOCIONA_API_BASE || 'https://api.sociona.app/api/v1';
 
 if (!SOCIONA_API_KEY) {
   console.error('SOCIONA_API_KEY environment variable is required');
@@ -100,6 +100,20 @@ class SocionaMCPServer {
                 default: 50,
                 minimum: 1,
                 maximum: 100,
+              },
+            },
+          },
+        },
+        {
+          name: 'get_scheduled_posts',
+          description: 'Get scheduled posts, optionally filtered by status',
+          inputSchema: {
+            type: 'object',
+            properties: {
+              status: {
+                type: 'string',
+                enum: ['QUEUED', 'PROCESSING', 'PUBLISHED', 'FAILED', 'CANCELED'],
+                description: 'Optional status filter',
               },
             },
           },
@@ -289,7 +303,7 @@ class SocionaMCPServer {
     }
 
     const postList = posts
-      .map((p: any) => `- ${p.provider}: ${p.status} (${p.startedAt}) ${p.url ? `URL: ${p.url}` : ''}`)
+      .map((p: any) => `- ${p.provider}: ${p.status} (${p.publishedAt || p.startedAt || p.scheduledFor}) ${p.providerUrl ? `URL: ${p.providerUrl}` : ''}${p.text ? `\n  ${String(p.text).slice(0, 120)}` : ''}`)
       .join('\n');
 
     return {
