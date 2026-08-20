@@ -1,3 +1,18 @@
+## 2.0.0 — MCP 2026-07-28 stateless protocol
+
+- Rebuilt on the v2 SDK (`@modelcontextprotocol/server`): `serveStdio` decides
+  the era per connection — 2026-07-28 stateless clients get the new protocol
+  (per-request `_meta` envelope, `server/discover`), while clients opening with
+  the 2025-era `initialize` handshake are served unchanged. Existing installs
+  keep working.
+- Tools migrated to `registerTool` with zod schemas (typed inputs, enum
+  validation on platform/status).
+- `get_scheduled_posts` now appears in `tools/list` (it was callable but
+  unlisted in 1.x); `get_posts` renders `providerUrl` + a text snippet.
+- Default `SOCIONA_API_BASE` corrected to `https://api.sociona.app/api/v1`.
+
+Publish: `npm login && npm publish` from the repo root.
+
 # Releases & Packages
 
 This document explains how releases and packages are managed for the Sociona MCP Server.
@@ -178,3 +193,5 @@ Track package usage and downloads:
 ---
 
 For more information, see the [main README](README.md) or [developer installation guide](DEVELOPER_INSTALLATION.md).
+
+
