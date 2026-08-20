@@ -116,6 +116,22 @@ it. Deliveries are HMAC-signed (`x-sociona-signature: sha256=HMAC(secret,
 "<x-sociona-timestamp>.<body>")`) and endpoints auto-disable after 20
 consecutive failures.
 
+## Always surface the links
+
+Tool results carry URLs meant for the user — hand them over as markdown
+links, don't bury them:
+
+- `publish_post` / `publish_carousel` → `viewUrl` is the LIVE post on the
+  platform ("View it on Instagram"); `appUrl` opens the post list in
+  Sociona. If `viewUrl` is absent the post is still publishing — say so and
+  offer to check `get_posts` in a moment.
+- `create_carousel` → `openUrl` opens the design in the Studio editor.
+- `schedule_post` → `appUrl` opens the content calendar.
+- `add_idea` → `appUrl` opens the ideas board; `get_analytics_overview` →
+  the dashboard; `list_comment_inbox` → the engagement inbox.
+- `find_inspiration` results carry `source_url` — the original post on its
+  platform.
+
 ## Costs and safety
 
 - Tools marked as spending an AI action (`create_carousel`,
