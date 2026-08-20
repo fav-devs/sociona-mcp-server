@@ -39,7 +39,8 @@ first profile is used, which is right for single-profile workspaces.
 - **Engagement** (real on-platform writes): `list_comment_inbox`,
   `reply_to_comment`, `hide_comment`, `list_dm_conversations`,
   `get_dm_thread`, `reply_to_dm`
-- **Media & workflows**: `search_media_library`, `list_workflows`,
+- **Media & workflows**: `search_media_library`, `upload_media_from_url`,
+  `get_media_upload_url` + `confirm_media_upload`, `list_workflows`,
   `simulate_workflow`, `run_workflow`
 - **Jobs & webhooks**: `get_job_status`, `list_webhooks`, `create_webhook`,
   `delete_webhook`
@@ -115,6 +116,22 @@ not just numbers.
 it. Deliveries are HMAC-signed (`x-sociona-signature: sha256=HMAC(secret,
 "<x-sociona-timestamp>.<body>")`) and endpoints auto-disable after 20
 consecutive failures.
+
+### Getting media in
+
+Never base64 file bytes into a tool argument — they'd flow through the
+conversation. Pick by where the file lives:
+
+- **On the web** (or any public URL): `upload_media_from_url {url}` — the
+  server fetches and stores it; returns a hosted URL for `mediaUrls`.
+- **On the user's machine** (Claude Code): `get_media_upload_url {filename,
+  mimeType, size}` → upload the file with the returned presigned URL —
+  `curl -X PUT --upload-file <file> -H "Content-Type: <mimeType>"
+  "<uploadUrl>"` (send every returned header) → `confirm_media_upload
+  {key, filename, mimeType, size}` → hosted URL. Bytes go straight to
+  storage, never through the model.
+- **AI-generated**: `generate_image` / `generate_video` / carousel renders
+  already return hosted URLs — no upload step.
 
 ## Always surface the links
 
