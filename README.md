@@ -10,6 +10,22 @@ An MCP (Model Context Protocol) server that provides AI assistants and MCP-compa
   <img width="380" height="200" src="https://glama.ai/mcp/servers/@fav-devs/sociona-mcp-server/badge" alt="Sociona Server MCP server" />
 </a>
 
+## Claude skill
+
+The repo ships a Claude skill that teaches agents the Sociona workflows
+(carousel pipeline, research-to-schedule, async jobs, engagement safety).
+Install it next to the MCP server:
+
+```bash
+# project-level (recommended)
+mkdir -p .claude/skills && cp -r node_modules/sociona-mcp-server/skills/sociona .claude/skills/
+
+# or user-level
+mkdir -p ~/.claude/skills && cp -r node_modules/sociona-mcp-server/skills/sociona ~/.claude/skills/
+```
+
+Cloned the repo instead? Copy from `skills/sociona` directly.
+
 ## 🚀 Features
 
 - **Publish Posts**: Immediately publish content to social media platforms
