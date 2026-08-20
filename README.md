@@ -4,7 +4,9 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![GitHub release](https://img.shields.io/github/release/fav-devs/sociona-mcp-server.svg)](https://github.com/fav-devs/sociona-mcp-server/releases)
 
-An MCP (Model Context Protocol) server that provides AI assistants and MCP-compatible tools with access to the Sociona social media API.
+An MCP (Model Context Protocol) server that provides AI assistants and MCP-compatible tools with access to the Sociona social media API. Speaks the stateless MCP 2026-07-28 protocol and still serves clients using the older initialize handshake.
+
+> **Prefer the remote server?** Sociona also hosts MCP at `https://api.sociona.app/api/v1/mcp` (OAuth sign-in or the same API key as Bearer) with the full ~50-tool surface — agents, Studio carousels, discovery, analytics, engagement. This stdio package covers the publishing core and is handy for fully local setups.
 
 <a href="https://glama.ai/mcp/servers/@fav-devs/sociona-mcp-server">
   <img width="380" height="200" src="https://glama.ai/mcp/servers/@fav-devs/sociona-mcp-server/badge" alt="Sociona Server MCP server" />
@@ -52,13 +54,13 @@ curl -sSL https://raw.githubusercontent.com/fav-devs/sociona-mcp-server/main/ins
 ## ⚙️ Configuration
 
 ### 1. Get Your API Key
-1. Sign up at [Sociona Developer Portal](https://sociona.app/developer)
-2. Create a new application
-3. Generate an API key with required scopes:
-   - `posts:write` - for publishing posts
-   - `posts:read` - for reading posts
-   - `schedule:write` - for scheduling posts
-   - `schedule:read` - for reading scheduled posts
+1. Sign in to [Sociona](https://app.sociona.app) → Settings → Developer (or the Developer dashboard)
+2. Generate an API key — omit scopes to get the full catalog, or restrict to:
+   - `account:read` / `account:write`
+   - `posts:read` / `posts:write` (publishing AND scheduling)
+   - `ideas:read` / `ideas:write`
+   - `insights:read`
+   - `engagements:read` / `engagements:write`
 
 ### 2. Configure Your MCP Client
 
@@ -113,9 +115,14 @@ The Sociona MCP Server exposes the following tools:
 - **`schedule_post`**: Schedule a social media post for future publication
 - **`get_accounts`**: List all connected social media accounts
 - **`get_posts`**: Retrieve recent post history
-- **`get_scheduled_posts`**: View upcoming scheduled posts
+- **`get_scheduled_posts`**: View scheduled posts (optional status filter)
 - **`cancel_scheduled_post`**: Cancel a scheduled post before it publishes
 - **`get_post_stats`**: Get statistics about your posts
+
+The hosted remote server (`/api/v1/mcp`) additionally exposes the agents,
+Studio, discovery, ideas, analytics, engagement, media, workflow, and
+webhook tools — see the [Sociona docs](https://docs.sociona.app) for the
+full list.
 
 ## 🔧 Development
 
